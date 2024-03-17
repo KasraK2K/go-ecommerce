@@ -1,0 +1,13 @@
+/.vscode
+/log
+/uploads
+/docker/backup
+
+.env
+docker/backend*
+/api*
+docker/.env
+dev
+
+config/.env.development
+config/.env.production
