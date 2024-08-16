@@ -15,7 +15,7 @@ type connection struct{}
 var Conn connection
 
 func (c *connection) Connect() *mongo.Client {
-	uri := config.AppConfig.MONGODB_URI
+	uri := config.AppConfig.MongodbUri
 
 	// Use the SetServerAPIOptions() method to set the Stable API version to 1
 	serverAPI := options.ServerAPI(options.ServerAPIVersion1)

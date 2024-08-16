@@ -11,7 +11,7 @@ import (
 )
 
 func Marshal(v interface{}) ([]byte, error) {
-	if config.AppConfig.MODE == "development" {
+	if config.AppConfig.Mode == "development" {
 		return json.MarshalIndent(v, "", "  ")
 	} else {
 		return json.Marshal(v)

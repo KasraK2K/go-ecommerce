@@ -23,7 +23,7 @@ func TestMarshal(t *testing.T) {
 	}
 
 	t.Run("Development", func(t *testing.T) {
-		config.AppConfig.MODE = "development"
+		config.AppConfig.Mode = "development"
 		expectedData := mockData
 
 		actualResult, err := Marshal(expectedData)
@@ -38,7 +38,7 @@ func TestMarshal(t *testing.T) {
 	})
 
 	t.Run("Production", func(t *testing.T) {
-		config.AppConfig.MODE = "production"
+		config.AppConfig.Mode = "production"
 		expectedData := mockData
 
 		actualResult, err := Marshal(expectedData)

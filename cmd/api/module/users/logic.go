@@ -1,4 +1,4 @@
-package user
+package users
 
 import (
 	"errors"
@@ -13,6 +13,10 @@ import (
 	"app/model"
 	"app/pkg"
 )
+
+type logic struct{}
+
+var Logic logic
 
 func (l *logic) List(filter model.UserFilter) ([]model.User, common.Status, error) {
 	if len(filter.Email) > 0 {

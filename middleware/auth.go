@@ -24,12 +24,15 @@ func PullOutToken(c *fiber.Ctx) error {
 	return c.Next()
 }
 
-/* -------------------------------------------------------------------------- */
+// OnlyLoggedUsers /* ------------------------------------------------------- */
 /*                              Route Middleware                              */
 /* -------------------------------------------------------------------------- */
 func OnlyLoggedUsers(c *fiber.Ctx, userType int) error {
 	var payload pkg.Payload
-	mapstructure.Decode(c.Locals("TokenPayload"), &payload)
+	err := mapstructure.Decode(c.Locals("TokenPayload"), &payload)
+	if err != nil {
+		return err
+	}
 
 	if payload.UserType == userType {
 		return c.Next()
@@ -40,7 +43,10 @@ func OnlyLoggedUsers(c *fiber.Ctx, userType int) error {
 
 func CheckPermission(c *fiber.Ctx, indexPermission int) error {
 	var payload pkg.Payload
-	mapstructure.Decode(c.Locals("TokenPayload"), &payload)
+	err := mapstructure.Decode(c.Locals("TokenPayload"), &payload)
+	if err != nil {
+		return err
+	}
 
 	if len(payload.Permission) <= 0 {
 		return pkg.JSON(c, "invalid access", http.StatusForbidden)

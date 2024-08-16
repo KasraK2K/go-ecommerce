@@ -24,17 +24,17 @@ func (c *gormConnection) Connect() {
 	appConfig := config.AppConfig
 
 	var dsn string
-	if len(appConfig.DB_DSN) > 0 {
-		dsn = appConfig.DB_DSN
+	if len(appConfig.DbDsn) > 0 {
+		dsn = appConfig.DbDsn
 	} else {
-		dsn = fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
-			appConfig.DB_HOST,
-			appConfig.DB_USER,
-			appConfig.DB_PASSWORD,
-			appConfig.DB_NAME,
-			appConfig.DB_PORT,
-			appConfig.DB_SSL_MODE,
-			appConfig.DB_TIMEZONE,
+		dsn = fmt.Sprintf("host=%s users=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
+			appConfig.DbHost,
+			appConfig.DbUser,
+			appConfig.DbPassword,
+			appConfig.DbName,
+			appConfig.DbPort,
+			appConfig.DbSslMode,
+			appConfig.DbTimezone,
 		)
 	}
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})

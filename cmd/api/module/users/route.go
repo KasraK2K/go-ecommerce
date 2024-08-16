@@ -1,4 +1,4 @@
-package user
+package users
 
 import (
 	"github.com/gofiber/fiber/v2"
@@ -10,7 +10,7 @@ import (
 func Routes(router fiber.Router) {
 	pg.Gorm.Migrate(&model.User{})
 
-	userGroup := router.Group("/user")
+	userGroup := router.Group("/users")
 
 	userGroup.Post("/find", Handler.List)
 	userGroup.Post("/create", Handler.Insert)

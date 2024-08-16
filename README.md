@@ -2,7 +2,7 @@
 ---
 <br />
 
-This is not full documentation but in here i explain most useful things that you cant see in the code and it's necessary.
+This is not full documentation but in here I explain most useful things that you cant see in the code, and it's necessary.
 <br />
 
 I hope it will be useful for you.
@@ -38,7 +38,7 @@ User=root
 Group=www-data
 ExecStart=<Path of your builded go file>
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-users.target
 ```
 NOTE: As you can see this file created with production mode environment
 <br />

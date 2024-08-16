@@ -8,8 +8,8 @@ import (
 
 func Connect(db int) *redis.Client {
 	return redis.NewClient(&redis.Options{
-		Addr:     config.AppConfig.REDIS_ADDRESS,
-		Password: config.AppConfig.REDIS_PASSWORD,
+		Addr:     config.AppConfig.RedisAddress,
+		Password: config.AppConfig.RedisPassword,
 		DB:       db,
 	})
 }

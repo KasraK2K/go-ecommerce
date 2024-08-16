@@ -16,10 +16,10 @@ type metaData struct {
 
 func AddMetaData(data interface{}, status int) *metaData {
 	metadata := metaData{
-		BACKEND_VERSION:  config.AppConfig.BACKEND_VERSION,
-		FRONTEND_VERSION: config.AppConfig.FRONTEND_VERSION,
-		APP_VERSION:      config.AppConfig.APP_VERSION,
-		MODE:             config.AppConfig.MODE,
+		BACKEND_VERSION:  config.AppConfig.BackendVersion,
+		FRONTEND_VERSION: config.AppConfig.FrontendVersion,
+		APP_VERSION:      config.AppConfig.AppVersion,
+		MODE:             config.AppConfig.Mode,
 	}
 
 	if status >= 400 {

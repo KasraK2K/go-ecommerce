@@ -7,7 +7,7 @@ import (
 )
 
 func ListOfFileNames(path string) ([]string, error) {
-	finalPath := config.AppConfig.UPLOAD_PATH + "/" + path
+	finalPath := config.AppConfig.UploadPath + "/" + path
 	files, err := os.ReadDir(finalPath)
 	if err != nil {
 		return []string{}, err
@@ -25,13 +25,13 @@ func ListOfFileNames(path string) ([]string, error) {
 }
 
 func ListOfFileURLs(path string) ([]string, error) {
-	finalPath := config.AppConfig.UPLOAD_PATH + "/" + path
+	finalPath := config.AppConfig.UploadPath + "/" + path
 	files, err := os.ReadDir(finalPath)
 	if err != nil {
 		return []string{}, err
 	}
 
-	basePath := config.AppConfig.STATIC_FILE_URL + "/" + path
+	basePath := config.AppConfig.StaticFileUrl + "/" + path
 	var fileNames []string
 
 	for _, file := range files {

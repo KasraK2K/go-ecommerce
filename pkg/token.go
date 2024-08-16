@@ -56,7 +56,7 @@ var Token = token{
 	UserType: userType,
 }
 
-/* -------------------------------------------------------------------------- */
+// CreateToken /* ----------------------------------------------------------- */
 /*                                Create Token                                */
 /* -------------------------------------------------------------------------- */
 // payloadClaims := pkg.PayloadClaims{
@@ -94,7 +94,7 @@ func (t *token) CreateToken(payloadClaims PayloadClaims) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	// Sign the token with the specified key
-	signingKey := []byte(config.AppConfig.JWT_SIGNING_KEY)
+	signingKey := []byte(config.AppConfig.JwtSigningKey)
 	tokenString, err := token.SignedString(signingKey)
 	if err != nil {
 		return "", err
@@ -103,7 +103,7 @@ func (t *token) CreateToken(payloadClaims PayloadClaims) (string, error) {
 	return tokenString, nil
 }
 
-/* -------------------------------------------------------------------------- */
+// ParseToken /* ------------------------------------------------------------ */
 /*                                 Parse Token                                */
 /* -------------------------------------------------------------------------- */
 // payload, err := pkg.ParseToken(token)
@@ -115,7 +115,7 @@ func (t *token) CreateToken(payloadClaims PayloadClaims) (string, error) {
 /* -------------------------------------------------------------------------- */
 func (t *token) ParseToken(tokenString string) (*Payload, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &PayloadClaims{}, func(token *jwt.Token) (interface{}, error) {
-		signingKey := []byte(config.AppConfig.JWT_SIGNING_KEY)
+		signingKey := []byte(config.AppConfig.JwtSigningKey)
 		return signingKey, nil
 	})
 	if err != nil {

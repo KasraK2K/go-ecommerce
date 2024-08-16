@@ -15,7 +15,7 @@ import (
 	"app/pkg"
 )
 
-// TODO : validate file type, validate file size, remove if not valid
+// HandleMultipart TODO : validate file type, validate file size, remove if not valid
 func HandleMultipart(c *fiber.Ctx) error {
 	contentType := c.Get("Content-Type")
 
@@ -23,7 +23,7 @@ func HandleMultipart(c *fiber.Ctx) error {
 		// If link is valid for upload
 		path := string(c.Request().URI().Path())
 		isValidPath := false
-		for _, item := range config.AppConfig.VALID_UPLOAD_ENDPOINTS {
+		for _, item := range config.AppConfig.ValidUploadEndpoints {
 			if path == item {
 				isValidPath = true
 			}
@@ -70,7 +70,7 @@ func upload(c *fiber.Ctx) (common.Status, error) {
 
 			// Check file type
 			isExtValid := false
-			for _, ext := range config.AppConfig.FILE_EXTENSIONS {
+			for _, ext := range config.AppConfig.FileExtensions {
 				if ext == fileExt {
 					isExtValid = true
 				}
@@ -80,7 +80,7 @@ func upload(c *fiber.Ctx) (common.Status, error) {
 			}
 
 			// Check File Size
-			if file.Size > config.AppConfig.FILE_SIZE {
+			if file.Size > config.AppConfig.FileSize {
 				return http.StatusNotAcceptable, errors.New("file is too large")
 			}
 

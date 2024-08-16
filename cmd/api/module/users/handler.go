@@ -1,4 +1,4 @@
-package user
+package users
 
 import (
 	"net/http"
@@ -8,6 +8,10 @@ import (
 	"app/model"
 	"app/pkg"
 )
+
+type handler struct{}
+
+var Handler handler
 
 func (h *handler) List(c *fiber.Ctx) error {
 	type JsonData struct {

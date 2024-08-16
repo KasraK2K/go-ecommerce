@@ -26,12 +26,12 @@ func SendEmail(payload EmailPayload) (response, trackId, error) {
 	bcc := payload.BCC
 
 	mg := mailgun.NewMailgun(
-		config.AppConfig.MAILGUN_DOMAIN,
-		config.AppConfig.MAILGUN_PRIVATE_API_KEY,
+		config.AppConfig.MailgunDomain,
+		config.AppConfig.MailgunPrivateApiKey,
 	)
-	mg.SetAPIBase(config.AppConfig.MAILGUN_API_BASE)
+	mg.SetAPIBase(config.AppConfig.MailgunApiBase)
 
-	message := mg.NewMessage(config.AppConfig.MAILGUN_SENDER, subject, "", recipients...)
+	message := mg.NewMessage(config.AppConfig.MailgunSender, subject, "", recipients...)
 	for _, item := range bcc {
 		message.AddBCC(item)
 	}

@@ -35,7 +35,7 @@ func (s *Server) connectDatabases() {
 
 func (s *Server) registerApplication() {
 	s.App = fiber.New(fiber.Config{
-		Prefork:               config.AppConfig.PREFORK,
+		Prefork:               config.AppConfig.PreFork,
 		ServerHeader:          "Fiber",
 		AppName:               "Go Blog v1.0.0",
 		CaseSensitive:         true,
@@ -69,10 +69,10 @@ func (s *Server) start() {
 	if !fiber.IsChild() {
 		greenColor := color.New(color.FgGreen).SprintFunc()
 		cyanColor := color.New(color.FgCyan).SprintFunc()
-		domain := fmt.Sprintf("http://localhost:%s", config.AppConfig.PORT)
+		domain := fmt.Sprintf("http://localhost:%s", config.AppConfig.Port)
 		message := fmt.Sprintf("%s %s", cyanColor("Server is starting on port"), greenColor(domain))
 		fmt.Println(message)
 	}
 
-	log.Fatal(server.App.Listen(fmt.Sprintf("127.0.0.1:%s", config.AppConfig.PORT)))
+	log.Fatal(server.App.Listen(fmt.Sprintf("127.0.0.1:%s", config.AppConfig.Port)))
 }
