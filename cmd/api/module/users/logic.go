@@ -113,7 +113,7 @@ func (l *logic) ForgotPassword(email string) (string, common.Status, error) {
 	payload := pkg.EmailPayload{
 		Recipients: []string{email},
 		Body:       fmt.Sprintf(body, password),
-		Subject:    "Change Password - CEC",
+		Subject:    "Change Password - Go Ecommerce",
 	}
 	_, _, err = pkg.SendEmail(payload)
 	if err != nil {
