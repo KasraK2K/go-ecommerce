@@ -1,9 +1,8 @@
 package users
 
 import (
-	"net/http"
-
 	"github.com/gofiber/fiber/v2"
+	"net/http"
 
 	"app/model"
 	"app/pkg"

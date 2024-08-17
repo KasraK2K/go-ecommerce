@@ -135,7 +135,7 @@ func (l *logic) Login(payload model.UserLoginPayload) (string, common.Status, er
 		ID:         user.ID,
 		Permission: user.Permission,
 		Platform:   payload.Platform,
-		UserType:   pkg.Token.UserType.Portal,
+		UserType:   pkg.Token.UserType.User,
 	}
 	token, err := pkg.Token.CreateToken(payloadClaims)
 	if err != nil {
