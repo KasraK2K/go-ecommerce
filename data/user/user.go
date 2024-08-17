@@ -1,6 +1,7 @@
 package user
 
 import (
+	"app/pkg"
 	"errors"
 	"net/http"
 	"strings"
@@ -26,7 +27,11 @@ func List(filter model.UserFilter, omits ...string) ([]model.User, common.Status
 }
 
 func Insert(user model.User) (model.User, common.Status, error) {
-	user = sanitiseData(user)
+	user, err := sanitiseData(user)
+	if err != nil {
+		return model.User{}, http.StatusInternalServerError, err
+	}
+
 	result := pg.Gorm.DB.Model(&model.User{}).Create(&user)
 	if result.Error != nil {
 		return model.User{}, http.StatusInternalServerError, result.Error
@@ -38,7 +43,11 @@ func Insert(user model.User) (model.User, common.Status, error) {
 
 func Update(filter model.UserFilter, update model.User) (model.User, common.Status, error) {
 	filter = sanitiseFilter(filter)
-	update = sanitiseData(update)
+	update, err := sanitiseData(update)
+	if err != nil {
+		return model.User{}, http.StatusInternalServerError, err
+	}
+
 	result := pg.Gorm.DB.Model(&model.User{}).Where(filter).Updates(&update).Scan(&update)
 	if result.Error != nil {
 		return model.User{}, http.StatusInternalServerError, result.Error
@@ -97,9 +106,19 @@ func sanitiseFilter(filter model.UserFilter) model.UserFilter {
 	return filter
 }
 
-func sanitiseData(data model.User) model.User {
+func sanitiseData(data model.User) (model.User, error) {
 	if len(data.Email) > 0 {
 		data.Email = strings.ToLower(data.Email)
 	}
-	return data
+
+	// Hash password
+	if len(data.Password) > 0 {
+		hash, err := pkg.HashPassword(data.Password)
+		if err != nil {
+			return data, err
+		}
+		data.Password = hash
+	}
+
+	return data, nil
 }
