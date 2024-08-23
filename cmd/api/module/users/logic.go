@@ -17,7 +17,7 @@ type logic struct{}
 var Logic logic
 
 func (l *logic) List(filter model.UserFilter) ([]model.User, common.Status, error) {
-	results, status, err := userData.List(filter, []string{"password"}...)
+	results, status, err := userData.List(filter, []string{"password", "otp"}...)
 	if err != nil {
 		return []model.User{}, status, err
 	}
@@ -108,7 +108,7 @@ func (l *logic) ForgotPassword(email string) (string, common.Status, error) {
 		return "", status, err
 	}
 
-	body := "<html><body>Your password is changed and your new password is <h3 style=\"display:inline\">%s</strong></body></html>"
+	body := "<html><body>Your password is changed. New password is <h3 style=\"display:inline\">%s</strong></body></html>"
 
 	payload := pkg.EmailPayload{
 		Recipients: []string{email},

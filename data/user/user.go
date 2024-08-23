@@ -32,12 +32,13 @@ func Insert(user model.User) (model.User, common.Status, error) {
 		return model.User{}, http.StatusInternalServerError, err
 	}
 
-	result := pg.Gorm.DB.Model(&model.User{}).Create(&user)
+	result := pg.Gorm.DB.Model(&model.User{}).Omit("otp").Create(&user)
 	if result.Error != nil {
 		return model.User{}, http.StatusInternalServerError, result.Error
 	}
 
 	user.Password = ""
+	user.OTP = nil
 	return user, http.StatusCreated, nil
 }
 
@@ -48,7 +49,7 @@ func Update(filter model.UserFilter, update model.User) (model.User, common.Stat
 		return model.User{}, http.StatusInternalServerError, err
 	}
 
-	result := pg.Gorm.DB.Model(&model.User{}).Where(filter).Updates(&update).Scan(&update)
+	result := pg.Gorm.DB.Model(&model.User{}).Where(filter).Omit("otp").Updates(&update).Scan(&update)
 	if result.Error != nil {
 		return model.User{}, http.StatusInternalServerError, result.Error
 	}
@@ -58,6 +59,7 @@ func Update(filter model.UserFilter, update model.User) (model.User, common.Stat
 	}
 
 	update.Password = ""
+	update.OTP = nil
 	return update, http.StatusOK, nil
 }
 
