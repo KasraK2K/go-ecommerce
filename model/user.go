@@ -12,8 +12,8 @@ type User struct {
 	OTP           *string        `json:"otp,omitempty"        bson:"otp,omitempty"        gorm:"type:string;"                            validate:"omitempty,min=6,max=6"`
 	Password      string         `json:"password,omitempty"   bson:"password,omitempty"   gorm:"type:string;check:length(password) >= 8" validate:"required,min=8,max=32"`
 	ContactNumber *string        `json:"contact_number"       bson:"contact_number"       gorm:"type:string;"`
-	FirstName     *string        `json:"first_name,omitempty" bson:"first_name,omitempty" gorm:"type:string;"                            validate:"omitempty,min=3,max=30"`
-	Surname       *string        `json:"surname,omitempty"    bson:"surname,omitempty"    gorm:"type:string;"                            validate:"omitempty,min=3,max=30"`
+	FirstName     *string        `json:"first_name"           bson:"first_name"           gorm:"type:string;"                            validate:"omitempty,min=3,max=30"`
+	Surname       *string        `json:"surname"              bson:"surname"              gorm:"type:string;"                            validate:"omitempty,min=3,max=30"`
 	IsActive      bool           `json:"is_active"            bson:"is_active"            gorm:"default:true"`
 	IsAdmin       bool           `json:"is_admin"             bson:"is_admin"             gorm:"default:false"`
 	IsArchive     bool           `json:"is_archive"           bson:"is_archive"           gorm:"default:false"`
