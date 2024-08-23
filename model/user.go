@@ -33,13 +33,12 @@ type UserFilter struct {
 }
 
 type UserUpdate struct {
-	ID            uint    `json:"id" bson:"id"`
-	Email         string  `json:"email"          bson:"email"`
-	OTP           *string `json:"otp"            bson:"otp"`
+	ID            uint    `json:"id"             bson:"id"`
+	Email         string  `json:"email"          bson:"email"           validate:"omitempty,email,min=6,max=32"`
 	Password      string  `json:"password"       bson:"password"`
 	ContactNumber *string `json:"contact_number" bson:"contact_number"`
-	FirstName     *string `json:"first_name"     bson:"first_name"`
-	Surname       *string `json:"surname"        bson:"surname"`
+	FirstName     *string `json:"first_name"     bson:"first_name"      validate:"omitempty,min=3,max=30"`
+	Surname       *string `json:"surname"        bson:"surname"         validate:"omitempty,min=3,max=30"`
 	IsActive      bool    `json:"is_active"      bson:"is_active"`
 	IsAdmin       bool    `json:"is_admin"       bson:"is_admin"`
 	Permission    string  `json:"permission"     bson:"permission"`
